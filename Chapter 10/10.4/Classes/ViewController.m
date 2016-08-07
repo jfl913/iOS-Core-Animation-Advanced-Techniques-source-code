@@ -23,19 +23,22 @@
     //create timing function
     CAMediaTimingFunction *function =
         [CAMediaTimingFunction functionWithName:
-         kCAMediaTimingFunctionEaseOut];
+         kCAMediaTimingFunctionDefault];
     
     //get control points
-    CGPoint controlPoint1, controlPoint2;
-    [function getControlPointAtIndex:1 values:(float *)&controlPoint1];
-    [function getControlPointAtIndex:2 values:(float *)&controlPoint2];
+    // 修改示例代码为下面这种语法，原先的效果不出来
+    float controlPoint1[2];
+    float controlPoint2[2];
+    
+    [function getControlPointAtIndex:1 values:controlPoint1];
+    [function getControlPointAtIndex:2 values:controlPoint2];
     
     //create curve
     UIBezierPath *path = [[UIBezierPath alloc] init];
     [path moveToPoint:CGPointZero];
     [path addCurveToPoint:CGPointMake(1, 1)
-            controlPoint1:controlPoint1
-            controlPoint2:controlPoint2];
+            controlPoint1:CGPointMake(controlPoint1[0], controlPoint1[1])
+            controlPoint2:CGPointMake(controlPoint2[0], controlPoint2[1])];
     
     //scale the path up to a reasonable size for display
     [path applyTransform:CGAffineTransformMakeScale(200, 200)];

@@ -11,7 +11,7 @@
 @interface ViewController ()
 
 @property (nonatomic, weak) IBOutlet UIView *layerView;
-@property (nonatomic, weak) IBOutlet CALayer *colorLayer;
+@property (nonatomic, strong) CALayer *colorLayer;
 
 @end
 
